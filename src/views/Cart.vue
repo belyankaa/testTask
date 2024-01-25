@@ -7,7 +7,7 @@ export default {
   components: {Card},
   data() {
     return {
-      cards: CatalogService.getCartProducts()
+      cards: []
     }
   },
   methods: {
@@ -16,6 +16,9 @@ export default {
         return item.id !== post.id;
       })
     }
+  },
+  beforeMount() {
+    this.cards = CatalogService.getCartProducts();
   }
 }
 </script>

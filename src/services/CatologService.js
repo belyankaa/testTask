@@ -49,6 +49,9 @@ export class CatologService {
         ]
     }
     static getCartProducts() {
+        if (localStorage.getItem('products') === null) {
+            return []
+        }
         return JSON.parse(localStorage.getItem('products'));
     }
 }

@@ -31,9 +31,11 @@ export default {
 
   },
   beforeMount() {
-    this.cardsInCart.forEach(item => {
-      this.cardsIds.push(item.id);
-    })
+    if (this.cardsInCart) {
+      this.cardsInCart.forEach(item => {
+        this.cardsIds.push(item.id);
+      })
+    }
 
     this.cardsAll.forEach(item => {
       item.inCart = false;
@@ -51,7 +53,7 @@ export default {
 
 <template>
   <section class="catalog">
-    <Card v-for="card in cardsAll" :template="'catalog'" :inCart="card.inCart" :card="card" :key="card.id"
+    <Card v-if="cardsAll" v-for="card in cardsAll" :template="'catalog'" :inCart="card.inCart" :card="card" :key="card.id"
           @removeItem="removeFromCart" @addItem="addToCart"/>
   </section>
 </template>
@@ -64,8 +66,4 @@ export default {
   flex-wrap: wrap;
   padding: 50px 100px;
 }
-
-@media (min-width: 1024px) {
-}
-
 </style>
